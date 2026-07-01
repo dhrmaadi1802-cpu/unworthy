@@ -1,12 +1,21 @@
-import os
 import shutil
+import os
 
-src_black = r"C:\Users\Lenovo\.gemini\antigravity\brain\ea94f6ec-b269-49c0-a43a-ceca32cce15e\black_tshirt_mockup_1782838687890.png"
-src_blue = r"C:\Users\Lenovo\.gemini\antigravity\brain\ea94f6ec-b269-49c0-a43a-ceca32cce15e\blue_tshirt_mockup_1782838708125.png"
+brain_dir = r"C:\Users\Lenovo\.gemini\antigravity\brain\ea94f6ec-b269-49c0-a43a-ceca32cce15e"
+assets_dir = r"c:\xampp\unworty\assets"
 
-dest_dir = r"c:\xampp\unworty\assets"
+os.makedirs(assets_dir, exist_ok=True)
 
-os.makedirs(dest_dir, exist_ok=True)
-shutil.copy2(src_black, os.path.join(dest_dir, "black_tshirt.png"))
-shutil.copy2(src_blue, os.path.join(dest_dir, "blue_tshirt.png"))
-print("Done")
+files = [
+    ("media__1782840075018.png", "produk1.png"),
+    ("media__1782872518751.jpg", "produk2.jpg")
+]
+
+for src_name, dest_name in files:
+    src_path = os.path.join(brain_dir, src_name)
+    dest_path = os.path.join(assets_dir, dest_name)
+    if os.path.exists(src_path):
+        shutil.copy2(src_path, dest_path)
+        print(f"Copied {src_name} to {dest_name}")
+    else:
+        print(f"Source file not found: {src_path}")
